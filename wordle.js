@@ -57,17 +57,20 @@ function renderGrid() {
 function handleKeyPress(event) {
   const key = event.key.toLowerCase();
 
-  // Check for alphabet letters
-  if (key >= "a" && key <= "z" && currentCol < 5) {
-    guesses[currentRow][currentCol] = key;
-    currentCol++;
-    renderGrid();
-  }
-
   // Handle backspace
   if (key === "backspace" && currentCol > 0) {
     currentCol--;
     guesses[currentRow][currentCol] = "";
+    renderGrid();
+    return;
+  } else if (key === "backspace") {
+    return;
+  }
+
+  // Check for alphabet letters
+  if (/^[a-zA-Z]$/.test(key) && currentCol < 5) {
+    guesses[currentRow][currentCol] = key;
+    currentCol++;
     renderGrid();
   }
 
@@ -112,9 +115,10 @@ function handleKeyPress(event) {
     feedback[currentRow] = rowFeedback;
 
     if (guess === targetWord) {
-      alert("You Win!");
+      alert("The clue iis ${targetWord}");
     } else if (currentRow === 5) {
-      alert(`Game Over! The word was: ${targetWord}`);
+      alert(`Try Again!`);
+      location.reload();
     }
 
     currentRow++;
