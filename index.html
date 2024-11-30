@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ava's Christmas Present</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f5f5f5;
+            color: #333;
+            text-align: center;
+            padding: 30px;
+        }
+        h1 {
+            color: #d84b16;
+        }
+        .container {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-top: 30px;
+        }
+        .image {
+            width: 400px;
+            height: 400px;
+            /*background-color: #e7f7fc;*/
+            border-radius: 10px;
+            margin-right: 20px;
+        }
+        .text {
+            max-width: 600px;
+            text-align: left;
+        }
+        .clue {
+            margin: 20px 0;
+            padding: 10px;
+            /*background-color: #e7f7fc;
+            border: 1px solid #88c9f1;
+            border-radius: 5px;*/
+            font-size: 18px;
+        }
+        .link {
+            color: #007BFF;
+            text-decoration: none;
+            font-weight: bold;
+        }
+        .link:hover {
+            text-decoration: underline;
+        }
+        .hidden {
+            display: none;
+        }
+        .unlock-message {
+            font-size: 20px;
+            font-weight: bold;
+            color: green;
+        }
+    </style>
+</head>
+<body>
+
+    <h1>Ava's Christmas Present</h1>
+    <p>Ava has a very special Christmas present waiting for her! But, to unlock it, Ava must figure out the secret keyword. She will need to follow the clues and solve the puzzle!</p>
+
+    <div class="container">
+        <!-- Left Side: Image -->
+        <div class="image">
+            <img src="christmas.png" alt="Christmas Present" width="400" height="400" style="border-radius: 10px;"/>
+        </div>
+
+        <!-- Right Side: Text and Clues -->
+        <div class="text">
+          <div class="clue">
+              <p><strong>Clue #1:</strong> <a href="wordle.html?clue=1" class="link">The first clue is simple!</a></p>
+          </div>
+
+          <div class="clue">
+              <p><strong>Clue #2:</strong> <a href="wordle.html?clue=2" class="link">The second clue is a little harder..!</a></p>
+          </div>
+
+          <div class="clue">
+              <p><strong>Clue #3:</strong> <a href="wordle.html?clue=3" class="link">The final clue</a></p>
+          </div>
+        </div>
+    </div>
+
+</body>
+</html>
