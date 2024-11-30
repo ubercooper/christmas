@@ -10,35 +10,41 @@
             background-color: #f5f5f5;
             color: #333;
             text-align: center;
-            padding: 30px;
+            padding: 20px;
+            margin: 0;
         }
         h1 {
             color: #d84b16;
         }
         .container {
             display: flex;
+            flex-wrap: wrap; /* Allow content to wrap for smaller screens */
             align-items: center;
             justify-content: center;
-            margin-top: 30px;
+            margin-top: 20px;
         }
         .image {
-            width: 400px;
-            height: 400px;
-            /*background-color: #e7f7fc;*/
+            width: 100%; /* Full width on small screens */
+            max-width: 200px; /* Limit max width */
+            margin: 0 auto 20px auto; /* Center with margin on mobile */
+        }
+        .image img {
+            width: 100%;
+            height: auto;
             border-radius: 10px;
-            margin-right: 20px;
         }
         .text {
             max-width: 600px;
             text-align: left;
+            width: 100%; /* Full width on small screens */
         }
         .clue {
-            margin: 20px 0;
+            margin: 15px 0;
             padding: 10px;
-            /*background-color: #e7f7fc;
+            background-color: #e7f7fc;
             border: 1px solid #88c9f1;
-            border-radius: 5px;*/
-            font-size: 18px;
+            border-radius: 5px;
+            font-size: 16px;
         }
         .link {
             color: #007BFF;
@@ -56,6 +62,18 @@
             font-weight: bold;
             color: green;
         }
+        @media (min-width: 768px) {
+            .container {
+                flex-wrap: nowrap; /* No wrapping on larger screens */
+            }
+            .image {
+                width: auto; /* Shrink to fit content on larger screens */
+                margin: 0 20px 0 0; /* Align next to text */
+            }
+            .text {
+                width: auto; /* Fit content */
+            }
+        }
     </style>
 </head>
 <body>
@@ -71,17 +89,17 @@
 
         <!-- Right Side: Text and Clues -->
         <div class="text">
-          <div class="clue">
-              <p><strong>Clue #1:</strong> <a href="wordle.html?clue=1" class="link">The first clue is simple!</a></p>
-          </div>
+            <div class="clue">
+                <p><strong>Clue #1:</strong> <a href="wordle.html?clue=1" class="link">The first clue is simple!</a></p>
+            </div>
 
-          <div class="clue">
-              <p><strong>Clue #2:</strong> <a href="wordle.html?clue=2" class="link">The second clue is a little harder..!</a></p>
-          </div>
+            <div class="clue">
+                <p><strong>Clue #2:</strong> <a href="wordle.html?clue=2" class="link">The second clue is a little harder..!</a></p>
+            </div>
 
-          <div class="clue">
-              <p><strong>Clue #3:</strong> <a href="wordle.html?clue=3" class="link">The final clue</a></p>
-          </div>
+            <div class="clue">
+                <p><strong>Clue #3:</strong> <a href="wordle.html?clue=3" class="link">The final clue</a></p>
+            </div>
         </div>
     </div>
 

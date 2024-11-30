@@ -6,6 +6,10 @@
   justify-content: center; /* Center align the row cells */
 }
 
+h1 {
+  color: #d84b16;
+}
+
 /* Styles for each cell */
 .cell {
   width: 50px;
