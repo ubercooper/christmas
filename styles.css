@@ -23,6 +23,7 @@ h1 {
   border: 1px solid #ccc;
   border-radius: 5px;
   text-transform: uppercase;
+  text-align: center;
 }
 
 /* Active cell styling for the current row */
@@ -45,4 +46,78 @@ h1 {
 .absent {
   background-color: grey;
   color: white;
+}
+
+.input-area {
+  margin-bottom: 20px;
+}
+
+#inputField {
+  width: 100%;
+  padding: 15px;
+  font-size: 18px;
+  border: 2px solid #ccc;
+  border-radius: 10px;
+  text-align: center;
+}
+
+/* Keyboard Styling */
+.keyboard {
+  display: grid;
+  grid-template-columns: repeat(10, 1fr);
+  gap: 10px;
+  margin-top: 20px;
+}
+
+.keyboard button {
+  width: 40px;
+  height: 40px;
+  font-size: 18px;
+  border: 1px solid #ccc;
+  background-color: #fff;
+  cursor: pointer;
+  border-radius: 5px;
+  transition: background-color 0.3s;
+}
+
+.keyboard button:hover {
+  background-color: #f0f0f0;
+}
+
+.keyboard button:active {
+  background-color: #e0e0e0;
+}
+
+.keyboard button:focus {
+  outline: none;
+}
+
+/* Mobile responsiveness */
+@media (max-width: 480px) {
+  #inputField {
+      font-size: 16px;
+  }
+
+  .keyboard {
+      grid-template-columns: repeat(10, 1fr);
+      gap: 5px;
+  }
+
+  .keyboard button {
+      width: 35px;
+      height: 35px;
+      font-size: 16px;
+  }
+}
+
+@media (max-width: 375px) {
+  .keyboard {
+      grid-template-columns: repeat(9, 1fr);
+  }
+}
+
+@media (max-width: 320px) {
+  .keyboard {
+      grid-template-columns: repeat(8, 1fr);
+  }
 }

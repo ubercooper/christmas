@@ -26,9 +26,16 @@ function renderGrid() {
     rowDiv.className = "row";
 
     for (let col = 0; col < 5; col++) {
-      const cell = document.createElement("div");
+      const cell = document.createElement("input");
+      cell.type = "text";
+      cell.maxLength = "1";
       cell.className = "cell";
+      cell.id = "r"+row+"c"+col;
+      if (row === 0 & col === 0) {
+
+      }
       cell.textContent = guesses[row][col];
+      cell.value = guesses[row][col];
 
       // Apply the feedback colors
       if (feedback[row][col] === "correct") {
@@ -133,3 +140,7 @@ const clue = urlParams.get('clue');
 renderGrid();
 document.addEventListener("keydown", handleKeyPress);
 loadDictionary(clue);
+window.onload = function() {
+  var input = document.getElementById("r0c0");
+  input.focus();
+}
