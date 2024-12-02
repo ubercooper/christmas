@@ -63,12 +63,17 @@ function renderGrid() {
 // Handle keypress input
 function handleKeyPress(event) {
   const key = event.key.toLowerCase();
+  alert(key);
+  var inputId = "r"+currentRow+"c"+currentCol;
+  var input = document.getElementById(inputId);
+
 
   // Handle backspace
   if (key === "backspace" && currentCol > 0) {
     currentCol--;
     guesses[currentRow][currentCol] = "";
     renderGrid();
+    input.previousElementSibling.focus();
     return;
   } else if (key === "backspace") {
     return;
@@ -79,6 +84,7 @@ function handleKeyPress(event) {
     guesses[currentRow][currentCol] = key;
     currentCol++;
     renderGrid();
+    input.nextElementSibling.focus();
   }
 
   // Handle Enter key
