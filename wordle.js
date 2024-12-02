@@ -36,6 +36,9 @@ function renderGrid() {
       }
       cell.textContent = guesses[row][col];
       cell.value = guesses[row][col];
+      cell.addEventListener('input', (event) => {
+        handleKeyPress(event);
+      });
 
       // Apply the feedback colors
       if (feedback[row][col] === "correct") {
@@ -62,11 +65,12 @@ function renderGrid() {
 
 // Handle keypress input
 function handleKeyPress(event) {
-  alert(event);
-  const key = event.key.toLowerCase();
 
-  var inputId = "r"+currentRow+"c"+currentCol;
-  var input = document.getElementById(inputId);
+  const key = event.key.toLowerCase();
+  alert(key);
+
+
+
 
 
   // Handle backspace
@@ -74,7 +78,8 @@ function handleKeyPress(event) {
     currentCol--;
     guesses[currentRow][currentCol] = "";
     renderGrid();
-    input.previousElementSibling.focus();
+    var focusId = "r"+currentRow+"c"+(currentCol-1);
+    var focusElement = document.getElementById(focusId).focus();
     return;
   } else if (key === "backspace") {
     return;
@@ -83,16 +88,25 @@ function handleKeyPress(event) {
   // Check for alphabet letters
   if (/^[a-zA-Z]$/.test(key) && currentCol < 5) {
     guesses[currentRow][currentCol] = key;
-    currentCol++;
+
     renderGrid();
-    input.nextElementSibling.focus();
+    var nextId = "r"+currentRow+"c"+(currentCol+1);
+    if (currentCol === 4) {
+      nextId = "r"+currentRow+1+"c"+0;
+    }
+    var next = document.getElementById(nextId).focus();
+    currentCol++;
   }
 
   // Handle Enter key
-  if (key === "enter" && currentCol === 5) {
+  //if ((key === "enter" && currentCol === 4) ) {
+  if (currentCol ===5) {
+
     const guess = guesses[currentRow].join("").toLowerCase();
     if (!dictionary[guess]) {
       alert("Invalid word!");
+      var nextId = "r"+currentRow+"c"+(currentCol-1);
+      var next = document.getElementById(nextId).focus();
       return;
     }
 
@@ -129,7 +143,7 @@ function handleKeyPress(event) {
     feedback[currentRow] = rowFeedback;
 
     if (guess === targetWord) {
-      alert("The clue iis ${targetWord}");
+      alert("The clue is ${targetWord}");
     } else if (currentRow === 5) {
       alert(`Try Again!`);
       location.reload();
