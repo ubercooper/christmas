@@ -62,8 +62,9 @@ function renderGrid() {
 
 // Handle keypress input
 function handleKeyPress(event) {
+  alert(event);
   const key = event.key.toLowerCase();
-  alert(key);
+
   var inputId = "r"+currentRow+"c"+currentCol;
   var input = document.getElementById(inputId);
 
