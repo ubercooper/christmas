@@ -64,60 +64,66 @@ h1 {
 /* Keyboard Styling */
 .keyboard {
   display: grid;
-  grid-template-columns: repeat(10, 1fr);
   gap: 10px;
-  margin-top: 20px;
 }
 
+/* Rows for Keys */
+.keyboard .row {
+  display: grid;
+  grid-template-columns: repeat(10, 1fr);
+  gap: 10px;
+}
+
+.keyboard .row.special-keys {
+  grid-template-columns: repeat(2, 1fr); /* Special row for Backspace and Enter */
+}
+
+/* Keys */
 .keyboard button {
-  width: 40px;
-  height: 40px;
+  padding: 15px;
   font-size: 18px;
   border: 1px solid #ccc;
-  background-color: #fff;
+  border-radius: 8px;
+  background-color: #f9f9f9;
   cursor: pointer;
-  border-radius: 5px;
   transition: background-color 0.3s;
 }
 
 .keyboard button:hover {
-  background-color: #f0f0f0;
-}
-
-.keyboard button:active {
   background-color: #e0e0e0;
 }
 
-.keyboard button:focus {
-  outline: none;
+.keyboard button:active {
+  background-color: #d0d0d0;
 }
 
-/* Mobile responsiveness */
-@media (max-width: 480px) {
-  #inputField {
-      font-size: 16px;
+/* Mobile Responsiveness */
+@media (max-width: 768px) {
+  .keyboard .row {
+      grid-template-columns: repeat(10, 1fr);
   }
 
-  .keyboard {
-      grid-template-columns: repeat(10, 1fr);
-      gap: 5px;
+  .keyboard .row.special-keys {
+      grid-template-columns: repeat(2, 1fr);
   }
 
   .keyboard button {
-      width: 35px;
-      height: 35px;
+      padding: 10px;
       font-size: 16px;
   }
 }
 
-@media (max-width: 375px) {
-  .keyboard {
-      grid-template-columns: repeat(9, 1fr);
+@media (max-width: 480px) {
+  .keyboard .row {
+      grid-template-columns: repeat(10, 1fr);
   }
-}
 
-@media (max-width: 320px) {
-  .keyboard {
-      grid-template-columns: repeat(8, 1fr);
+  .keyboard .row.special-keys {
+      grid-template-columns: repeat(2, 1fr);
+  }
+
+  .keyboard button {
+      padding: 8px;
+      font-size: 14px;
   }
 }

@@ -51,81 +51,139 @@ function renderGrid() {
   }
 }
 
+// Handle key press
+function handleKeyClick(key) {
+  // Handle backspace
+if (key === "backspace" && currentCol > 0) {
+currentCol--;
+guesses[currentRow][currentCol] = "";
+renderGrid();
+return;
+} else if (key === "backspace") {
+return;
+}
+
+// Check for alphabet letters
+if (/^[a-zA-Z]$/.test(key) && currentCol < 5) {
+guesses[currentRow][currentCol] = key;
+currentCol++;
+renderGrid();
+}
+
+// Handle Enter key
+if (key === "enter" && currentCol === 5) {
+const guess = guesses[currentRow].join("").toLowerCase();
+if (!dictionary[guess]) {
+  alert("Invalid word!");
+  return;
+}
+
+// Check and color the guess
+const targetChars = targetWord.split("");
+const usedIndexes = new Set();
+const rowFeedback = Array(5).fill("absent");
+
+// Check correct positions
+for (let i = 0; i < 5; i++) {
+  if (guesses[currentRow][i] === targetChars[i]) {
+    rowFeedback[i] = "correct";
+    usedIndexes.add(i);
+  }
+}
+
+// Check misplaced letters
+for (let i = 0; i < 5; i++) {
+  if (rowFeedback[i] !== "correct" && targetChars.includes(guesses[currentRow][i])) {
+    for (let j = 0; j < 5; j++) {
+      if (
+        !usedIndexes.has(j) &&
+        guesses[currentRow][i] === targetChars[j]
+      ) {
+        rowFeedback[i] = "present";
+        usedIndexes.add(j);
+        break;
+      }
+    }
+  }
+}
+
+// Store the feedback for the current row
+feedback[currentRow] = rowFeedback;
+
+if (guess === targetWord) {
+  alert('The clue is: ' + targetWord+'!');
+} else if (currentRow === 5) {
+  alert(`Try Again!`);
+  location.reload();
+}
+
+currentRow++;
+currentCol = 0;
+renderGrid();
+}
+}
+
 
 
 // Handle keypress input
 function handleKeyPress(event) {
   const key = event.key.toLowerCase();
-
-  // Handle backspace
-  if (key === "backspace" && currentCol > 0) {
-    currentCol--;
-    guesses[currentRow][currentCol] = "";
-    renderGrid();
-    return;
-  } else if (key === "backspace") {
-    return;
-  }
-
-  // Check for alphabet letters
-  if (/^[a-zA-Z]$/.test(key) && currentCol < 5) {
-    guesses[currentRow][currentCol] = key;
-    currentCol++;
-    renderGrid();
-  }
-
-  // Handle Enter key
-  if (key === "enter" && currentCol === 5) {
-    const guess = guesses[currentRow].join("").toLowerCase();
-    if (!dictionary[guess]) {
-      alert("Invalid word!");
-      return;
-    }
-
-    // Check and color the guess
-    const targetChars = targetWord.split("");
-    const usedIndexes = new Set();
-    const rowFeedback = Array(5).fill("absent");
-
-    // Check correct positions
-    for (let i = 0; i < 5; i++) {
-      if (guesses[currentRow][i] === targetChars[i]) {
-        rowFeedback[i] = "correct";
-        usedIndexes.add(i);
-      }
-    }
-
-    // Check misplaced letters
-    for (let i = 0; i < 5; i++) {
-      if (rowFeedback[i] !== "correct" && targetChars.includes(guesses[currentRow][i])) {
-        for (let j = 0; j < 5; j++) {
-          if (
-            !usedIndexes.has(j) &&
-            guesses[currentRow][i] === targetChars[j]
-          ) {
-            rowFeedback[i] = "present";
-            usedIndexes.add(j);
-            break;
-          }
-        }
-      }
-    }
-
-    // Store the feedback for the current row
-    feedback[currentRow] = rowFeedback;
-
-    if (guess === targetWord) {
-      alert('The clue is: ' + targetWord+'!');
-    } else if (currentRow === 5) {
-      alert(`Try Again!`);
-      location.reload();
-    }
-
-    currentRow++;
-    currentCol = 0;
-    renderGrid();
-  }
+  handleKeyClick(key);
 }
+
+document.addEventListener("DOMContentLoaded", function () {
+  const keyboardLayout = [
+      ["q", "w", "e", "r", "t", "y", "u", "i", "o", "p"],
+      ["a", "s", "d", "f", "g", "h", "j", "k", "l"],
+      ["z", "x", "c", "v", "b", "n", "m"]
+  ];
+
+const specialKeys = ["backspace", "enter"];
+
+  const textInput = document.getElementById("textInput");
+  const keyboard = document.getElementById("keyboard");
+
+  // Render the keyboard
+  function renderKeyboard() {
+      keyboard.innerHTML = ""; // Clear existing buttons
+      keyboard.innerHTML = ""; // Clear existing keys
+
+        // Create rows for regular keys
+        keyboardLayout.forEach(rowKeys => {
+            const row = document.createElement("div");
+            row.className = "row";
+            rowKeys.forEach(key => {
+                const button = createKeyButton(key);
+                row.appendChild(button);
+            });
+            keyboard.appendChild(row);
+        });
+
+        // Create a row for special keys
+        const specialRow = document.createElement("div");
+        specialRow.className = "row special-keys";
+        specialKeys.forEach(key => {
+            const button = createKeyButton(key);
+            specialRow.appendChild(button);
+        });
+        keyboard.appendChild(specialRow);
+
+
+  }
+
+  // Create a button for a key
+  function createKeyButton(key) {
+    const button = document.createElement("button");
+    button.textContent = key === "Space" ? "␣" : key;
+    button.className = key === "Space" ? "space" : "";
+
+    // Add button click event
+    button.addEventListener("click", () => handleKeyClick(key));
+    return button;
+}
+
+  renderKeyboard(); // Initialize keyboard
+});
 
 // Initialize game
 const urlParams = new URLSearchParams(window.location.search);
