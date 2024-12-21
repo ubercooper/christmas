@@ -5,7 +5,6 @@ let currentRow = 0;
 let currentCol = 0;
 let guesses = Array(6).fill("").map(() => Array(5).fill(""));
 let feedback = Array(6).fill("").map(() => Array(5).fill(""));
-let invalidCharacters = Array(26).fill("");// Store feedback for each guess
 
 // Load the external dictionary
 async function loadDictionary(clue) {
@@ -50,6 +49,7 @@ function renderGrid() {
         cell.classList.add("present");
       } else if (feedback[row][col] === "absent") {
         cell.classList.add("absent");
+        document.getElementById(guesses[row][col]).classList.add("absent");
       }
 
       // If it's the active row, apply the active style to the cell itself
@@ -167,6 +167,7 @@ const specialKeys = ["backspace", "enter"];
             row.className = "row";
             rowKeys.forEach(key => {
                 const button = createKeyButton(key);
+                button.id = key;
                 row.appendChild(button);
             });
             keyboard.appendChild(row);

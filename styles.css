@@ -78,6 +78,11 @@ h1 {
   grid-template-columns: repeat(2, 1fr); /* Special row for Backspace and Enter */
 }
 
+.keyboard .row button.absent {
+  background-color: grey;
+  color: white;
+}
+
 /* Keys */
 .keyboard button {
   padding: 15px;
@@ -88,6 +93,8 @@ h1 {
   cursor: pointer;
   transition: background-color 0.3s;
 }
+
+
 
 .keyboard button:hover {
   background-color: #e0e0e0;
