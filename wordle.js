@@ -33,7 +33,7 @@ function closeAlert() {
 function renderGrid() {
   grid.innerHTML = ""; // Clear the previous grid
 
-  for (let row = 0; row < 6; row++) {
+  for (let row = 0; row < 5; row++) {
     const rowDiv = document.createElement("div");
     rowDiv.className = "row";
 
