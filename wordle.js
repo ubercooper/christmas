@@ -161,10 +161,19 @@ const specialKeys = ["backspace", "enter"];
       keyboard.innerHTML = ""; // Clear existing buttons
       keyboard.innerHTML = ""; // Clear existing keys
 
+        let i = 0;
         // Create rows for regular keys
         keyboardLayout.forEach(rowKeys => {
             const row = document.createElement("div");
-            row.className = "row";
+
+            i = i +1;
+            if (i == 2) {
+              row.classList = "row indent2";
+            } else if (i == 3) {
+              row.classList = "row indent3";
+            } else {
+              row.className = "row";
+            }
             rowKeys.forEach(key => {
                 const button = createKeyButton(key);
                 button.id = key;

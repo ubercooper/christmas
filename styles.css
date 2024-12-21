@@ -67,11 +67,21 @@ h1 {
   gap: 2px;
 }
 
+.row.indent2 {
+  margin-left: 5%; /* Indent the second row by 5% of the container's width */
+}
+
+.row.indent3 {
+  margin-left: 15%; /* Indent the second row by 5% of the container's width */
+}
+
+
+
 /* Rows for Keys */
 .keyboard .row {
   display: grid;
   grid-template-columns: repeat(10, 1fr);
-  gap: 10px;
+  gap: 8px;
 }
 
 .keyboard .row.special-keys {
@@ -130,8 +140,8 @@ h1 {
   }
 
   .keyboard button {
-      padding: 16px;
-      font-size: 14px;
+     /* padding: 16px;*/
+      font-size: 16px;
   }
 }
 
