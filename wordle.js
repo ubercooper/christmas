@@ -1,21 +1,34 @@
 let dictionary = {};
-let targets = ["YXBwbGU=", "Z3JhcGU=", "cGVhY2g=", "bWVsb24=", "bGVtb24="]; // Predefined target words
+let targets = ["Y3luaWM=", "aGVhcnQ=", "Z3JlZW4="]; // Predefined target words
 let targetWord = "";
 let currentRow = 0;
 let currentCol = 0;
 let guesses = Array(6).fill("").map(() => Array(5).fill(""));
-let feedback = Array(6).fill("").map(() => Array(5).fill("")); // Store feedback for each guess
+let feedback = Array(6).fill("").map(() => Array(5).fill(""));
+let invalidCharacters = Array(26).fill("");// Store feedback for each guess
 
 // Load the external dictionary
 async function loadDictionary(clue) {
   try {
     const response = await fetch("words_dictionary.json");
     dictionary = await response.json();
-    targetWord = atob(targets[clue]);
-    console.log(`Target Word (for debugging): ${targetWord}`);
+    targetWord = atob(targets[clue-1]);
   } catch (error) {
     console.error("Failed to load the dictionary:", error);
   }
+}
+
+function showAlert(message) {
+  const alertBox = document.getElementById('customAlert');
+  const alertMessage = document.getElementById('alertMessage');
+  alertMessage.textContent = message;
+  alertBox.classList.remove('hidden');
+}
+
+// Function to close the alert
+function closeAlert() {
+  const alertBox = document.getElementById('customAlert');
+  alertBox.classList.add('hidden');
 }
 
 function renderGrid() {
@@ -74,7 +87,7 @@ renderGrid();
 if (key === "enter" && currentCol === 5) {
 const guess = guesses[currentRow].join("").toLowerCase();
 if (!dictionary[guess]) {
-  alert("Invalid word!");
+  showAlert("Word not in the dictionary.");
   return;
 }
 
@@ -111,9 +124,9 @@ for (let i = 0; i < 5; i++) {
 feedback[currentRow] = rowFeedback;
 
 if (guess === targetWord) {
-  alert('The clue is: ' + targetWord+'!');
+  showAlert('The clue is: ' + targetWord+'!');
 } else if (currentRow === 5) {
-  alert(`Try Again!`);
+  showAlert(`Try Again!`);
   location.reload();
 }
 
@@ -181,7 +194,6 @@ const specialKeys = ["backspace", "enter"];
     button.addEventListener("click", () => handleKeyClick(key));
     return button;
 }
-
   renderKeyboard(); // Initialize keyboard
 });
 

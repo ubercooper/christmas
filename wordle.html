@@ -8,7 +8,10 @@
   <link rel="stylesheet" href="styles.css">
 </head>
 <body>
-  <h1>Clue: <span id="name"></span></h1>
+  <div style="display: flex; justify-content: space-between;">
+    <span><h1>Clue: <span id="name"></span></h1></span>
+    <span><h2><a href="index.html" class="link">Go Back</a></h2></span>
+  </div>
 
     <script>
         // Function to escape HTML special characters
@@ -27,11 +30,19 @@
         // Sanitize the name and display it securely
         document.getElementById('name').innerHTML = name ? sanitize(name) : "";
     </script>
-  <h2><a href="index.html" class="link">Go Back</a></h2>
+
   <div id="grid"></div>
   <div class="container">
     <div class="keyboard" id="keyboard"></div>
 </div>
   <script src="wordle.js"></script>
+
+  <div id="customAlert" class="message-box hidden">
+    <div class="message-content">
+      <p id="alertMessage">This is a custom message.</p>
+      <button onclick="closeAlert()">OK</button>
+    </div>
+  </div>
+
 </body>
 </html>
