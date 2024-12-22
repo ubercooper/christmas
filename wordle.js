@@ -30,6 +30,12 @@ function closeAlert() {
   alertBox.classList.add('hidden');
 }
 
+function restart() {
+  const alertBox = document.getElementById('customAlert');
+  alertBox.classList.add('hidden');
+  location.reload();
+}
+
 function renderGrid() {
   grid.innerHTML = ""; // Clear the previous grid
 
@@ -125,9 +131,8 @@ feedback[currentRow] = rowFeedback;
 
 if (guess === targetWord) {
   showAlert('The clue is: ' + targetWord+'!');
-} else if (currentRow === 5) {
+} else if (currentRow === 4) {
   showAlert(`Try Again!`);
-  location.reload();
 }
 
 currentRow++;
